@@ -1,2 +1,196 @@
-# fortune
-print a random, hopefully interesting, adage (*full* BSD fortune re-implementation in Python)
+# Installation
+pip install [pnu-fortune](https://pypi.org/project/pnu-fortune/)
+
+# FORTUNE(6)
+
+## NAME
+fortune — print a random, hopefully interesting, adage
+
+## SYNOPSIS
+**fortune**
+\[-acCDefilosw\]
+\[-m pattern\]
+\[-n length\]
+\[-t tries\]
+\[--debug\]
+\[--help|-?\]
+\[--version\]
+\[--\]
+\[\[N%\] file/directory/all\]
+
+## DESCRIPTION
+When **fortune** is run with no arguments it prints out a random epigram from the *fortunes* database.
+Epigrams are divided into several categories, where each category is subdivided into those which are potentially offensive and those which are not.  
+
+### OPTIONS
+The options are as follows:
+
+Option|Use
+---|---
+-a|Choose from all lists of maxims, both offensive and not (See the *-o* option for more information on offensive fortunes).
+-c|Show the cookie file from which the fortune came.
+-C|Compatibility mode. Try to imitate the original BSD fortune command display as closely as possible.
+-D|Enable additional debugging output. Specify this option multiple times for more verbose output (unused in this re-implementation).
+-e|Consider all fortune files to be of equal size (see discussion below on multiple files).
+-f|Print out the list of files which would be searched, but do not print a fortune.
+-i|Ignore case for *-m patterns*.
+-l|Long dictums only. See *-n* on how ''long'' is defined.
+-m pattern|Print out all fortunes which match the regular expression pattern. See regex(3) for a description of patterns.
+-n length|Set the longest fortune length (in characters) considered to be ''short'' (the default is 160). All fortunes longer than this are considered ''long''.
+-o|Choose only from potentially offensive aphorisms. This option is superseded by *-a*.
+-s|Short apophthegms only. See *-n* on how ''short'' is defined.
+-t tries|Set the maximum number of attempts while searching for a ''short'' or ''long'' fortune (the default is 10).
+-w|Wait before termination for an amount of time calculated from the number of characters in the message. This is useful if it is executed as part of the logout procedure to guarantee that the message can be read before the screen is cleared.
+--debug|Enable debug mode
+--help\|-?|Print usage and a short help message and exit
+--version|Print version and exit
+--|Options processing terminator
+
+## ENVIRONMENT
+The COMMAND_DEBUG environment variable can also be set to any value to enable debug mode.
+
+## FILES
+
+## EXIT STATUS
+The **COMMAND** utility exits 0 on success, and >0 if an error occurs.
+
+## EXAMPLES
+
+## SEE ALSO
+
+## STANDARDS
+The **COMMAND** utility is a standard UNIX/POSIX command.
+
+It tries to follow the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide for [Python](https://www.python.org/) code.
+
+## PORTABILITY
+To be tested under Windows.
+
+## HISTORY
+This utility was made for [The PNU project](https://github.com/HubTou/PNU).
+
+## LICENSE
+This utility is available under the [3-clause BSD license](https://opensource.org/licenses/BSD-3-Clause).
+
+## AUTHORS
+[YOU](https://github.com/YOU)
+
+## CAVEATS
+
+## BUGS
+
+## SECURITY CONSIDERATIONS
+
+
+                   ... let us keep in mind the basic governing philosophy
+                   of The Brotherhood, as handsomely summarized in these words:
+                   we believe in healthy, hearty laughter -- at the expense of
+                   the whole human race, if needs be.
+                   Needs be.
+                                              --H. Allen Smith, "Rude Jokes"
+
+     The user may specify alternate sayings.  You can specify a specific file,
+     a directory which contains one or more files, or the special word all
+     which says to use all the standard databases.  Any of these may be pre‐
+     ceded by a percentage, which is a number N between 0 and 100 inclusive,
+     followed by a ‘%’.  If it is, there will be an N percent probability that
+     an adage will be picked from that file or directory.  If the percentages
+     do not sum to 100, and there are specifications without percentages, the
+     remaining percent will apply to those files and/or directories, in which
+     case the probability of selecting from one of them will be based on their
+     relative sizes.
+
+     As an example, given two databases funny and not-funny, with funny twice
+     as big, saying
+
+           fortune funny not-funny
+
+     will get you fortunes out of funny two-thirds of the time.  The command
+
+           fortune 90% funny 10% not-funny
+
+     will pick out 90% of its fortunes from funny (the “10% not-funny” is un‐
+     necessary, since 10% is all that is left).  The -e option says to con‐
+     sider all files equal; thus
+
+           fortune -e funny not-funny
+
+     is equivalent to
+
+           fortune 50% funny 50% not-funny
+
+ENVIRONMENT
+     FORTUNE_PATH  The search path for the data files.  It is a colon-sepa‐
+                   rated list of directories in which fortune looks for data
+                   files.  If not set it will default to
+                   /usr/share/games/fortune:/usr/local/share/games/fortune.
+
+                   Under a Posix system, $HOME/.local/share/games/fortune will
+                   also be added to the default, while
+                   %HOMEPATH%/appdata/roaming/python/share/games/fortune will
+                   be added under a Windows system.
+
+                   If none of the directories specified exist, it will print a
+                   warning and exit.  Note that by default, fortune only
+                   searches for a fortunes file, instead of all files in its
+                   FORTUNE_PATH.
+
+     FORTUNE_SAVESTATE
+                   If set, fortune will save some state about what fortune it
+                   was up to on disk (unused in this re-implementation, as it
+                   requires root access to the fortune directories).
+
+     FORTUNE_COMPAT
+                   Compatibility mode. If set, try to imitate the original BSD
+                   fortune command display as closely as possible.
+
+     FORTUNE_DEBUG
+                   Debug mode. If set, print some debug messages.
+
+FILES
+     /usr/share/games/fortune/*  the fortunes databases (those files ending
+                                 “-o” contain the offensive fortunes)
+
+     /usr/local/share/games/fortune/*
+
+     We offer many data files for this utility in several additional packages,
+     a few of them already installed as a dependency to this one.
+
+EXIT STATUS
+     The fortune utility exits 0 on success, and >0 if an error occurs.  In
+     particular, if -l, -m, or -s is specified, failure to find a matching ci‐
+     tation in the selected files counts as an error.
+
+SEE ALSO
+     cowsay(1), echobox(1), regex(3), strfile(8)
+
+STANDARDS
+     The fortune utility is not a standard UNIX/POSIX command.
+
+     This version tries to follow the PEP 8 style guide for Python code.
+
+PORTABILITY
+     Tested OK under Windows.
+
+HISTORY
+     The fortune utility first appeared in Version 7 AT&T UNIX.
+
+     The much more sophisticated BSD version which this version re-implement
+     was written by Ken Arnold around the end of 1978 and released with 4BSD
+     and 4.1cBSD between 1980 and 1982.
+
+     This re-implementation was made for the [PNU project]:
+     https://github.com/HubTou/PNU
+
+LICENSE
+     This utility is available under the 3-clause BSD license.
+
+AUTHORS
+     Hubert Tournier
+
+     The man page is derived from the FreeBSD project's one.
+
+CAVEATS
+     There are some display differences with the -f option between this re-im‐
+     plementation and classical BSD or Linux versions.  For instance, proba‐
+     bility percentages are printed for all files, not just those indicated.
