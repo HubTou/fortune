@@ -46,17 +46,54 @@ Option|Use
 --version|Print version and exit
 --|Options processing terminator
 
+The user may specify alternate sayings.
+You can specify a specific file, a directory which contains one or more files, or the special word *all* which says to use all the standard databases.
+Any of these may be preceded by a percentage, which is a number N between 0 and 100 inclusive, followed by a ‘%’.
+If it is, there will be an N percent probability that an adage will be picked from that file or directory. 
+If the percentages do not sum to 100, and there are specifications without percentages, the remaining percent will apply to those files and/or directories, in which case the probability of selecting from one of them will be based on their relative sizes.
+
+As an example, given two databases funny and not-funny, with funny twice as big, saying
+
+    fortune funny not-funny
+
+will get you fortunes out of funny two-thirds of the time. The command
+
+    fortune 90% funny 10% not-funny
+
+will pick out 90% of its fortunes from funny (the “10% not-funny” is unnecessary, since 10% is all that is left).
+The *-e* option says to consider all files equal; thus
+
+    fortune -e funny not-funny
+
+is equivalent to
+
+    fortune 50% funny 50% not-funny
+
 ## ENVIRONMENT
-The COMMAND_DEBUG environment variable can also be set to any value to enable debug mode.
+Variable|Use
+---|---
+FORTUNE_PATH|The search path for the data files. It is a colon-separated list of directories in which fortune looks for datafiles. If not set it will default to */usr/share/games/fortune:/usr/local/share/games/fortune*. Under a Posix system, *$HOME/.local/share/games/fortune* will also be added to the default, while *%HOMEPATH%/appdata/roaming/python/share/games/fortune* will be added under a Windows system. If none of the directories specified exist, it will print a warning and exit. Note that by default, fortune only searches for a *fortunes* file, instead of all files in its FORTUNE_PATH.
+FORTUNE_SAVESTATE|If set, fortune will save some state about what fortune it was up to on disk (unused in this re-implementation, as it requires root access to the fortune directories).
+FORTUNE_COMPAT|Compatibility mode. If set, try to imitate the original BSD fortune command display as closely as possible.
+FORTUNE_DEBUG|Debug mode. If set, print some debug messages.
 
 ## FILES
+Path|Description
+---|---
+/usr/share/games/fortune/\*|the fortunes databases (those files ending “-o” contain the offensive fortunes)
+/usr/local/share/games/fortune/\*|Additional fortunes
+
+We offer many data files for this utility in several additional packages, a few of them already installed as a dependency to this one.
 
 ## EXIT STATUS
-The **COMMAND** utility exits 0 on success, and >0 if an error occurs.
-
-## EXAMPLES
+The **fortune** utility exits 0 on success, and >0 if an error occurs.
+In particular, if *-l*, *-m*, or *-s* is specified, failure to find a matching citation in the selected files counts as an error.
 
 ## SEE ALSO
+cowsay(1),
+echobox(1),
+regex(3),
+strfile(8)
 
 ## STANDARDS
 The **COMMAND** utility is a standard UNIX/POSIX command.
@@ -89,80 +126,8 @@ This utility is available under the [3-clause BSD license](https://opensource.or
                    Needs be.
                                               --H. Allen Smith, "Rude Jokes"
 
-     The user may specify alternate sayings.  You can specify a specific file,
-     a directory which contains one or more files, or the special word all
-     which says to use all the standard databases.  Any of these may be pre‐
-     ceded by a percentage, which is a number N between 0 and 100 inclusive,
-     followed by a ‘%’.  If it is, there will be an N percent probability that
-     an adage will be picked from that file or directory.  If the percentages
-     do not sum to 100, and there are specifications without percentages, the
-     remaining percent will apply to those files and/or directories, in which
-     case the probability of selecting from one of them will be based on their
-     relative sizes.
 
-     As an example, given two databases funny and not-funny, with funny twice
-     as big, saying
 
-           fortune funny not-funny
-
-     will get you fortunes out of funny two-thirds of the time.  The command
-
-           fortune 90% funny 10% not-funny
-
-     will pick out 90% of its fortunes from funny (the “10% not-funny” is un‐
-     necessary, since 10% is all that is left).  The -e option says to con‐
-     sider all files equal; thus
-
-           fortune -e funny not-funny
-
-     is equivalent to
-
-           fortune 50% funny 50% not-funny
-
-ENVIRONMENT
-     FORTUNE_PATH  The search path for the data files.  It is a colon-sepa‐
-                   rated list of directories in which fortune looks for data
-                   files.  If not set it will default to
-                   /usr/share/games/fortune:/usr/local/share/games/fortune.
-
-                   Under a Posix system, $HOME/.local/share/games/fortune will
-                   also be added to the default, while
-                   %HOMEPATH%/appdata/roaming/python/share/games/fortune will
-                   be added under a Windows system.
-
-                   If none of the directories specified exist, it will print a
-                   warning and exit.  Note that by default, fortune only
-                   searches for a fortunes file, instead of all files in its
-                   FORTUNE_PATH.
-
-     FORTUNE_SAVESTATE
-                   If set, fortune will save some state about what fortune it
-                   was up to on disk (unused in this re-implementation, as it
-                   requires root access to the fortune directories).
-
-     FORTUNE_COMPAT
-                   Compatibility mode. If set, try to imitate the original BSD
-                   fortune command display as closely as possible.
-
-     FORTUNE_DEBUG
-                   Debug mode. If set, print some debug messages.
-
-FILES
-     /usr/share/games/fortune/*  the fortunes databases (those files ending
-                                 “-o” contain the offensive fortunes)
-
-     /usr/local/share/games/fortune/*
-
-     We offer many data files for this utility in several additional packages,
-     a few of them already installed as a dependency to this one.
-
-EXIT STATUS
-     The fortune utility exits 0 on success, and >0 if an error occurs.  In
-     particular, if -l, -m, or -s is specified, failure to find a matching ci‐
-     tation in the selected files counts as an error.
-
-SEE ALSO
-     cowsay(1), echobox(1), regex(3), strfile(8)
 
 STANDARDS
      The fortune utility is not a standard UNIX/POSIX command.
