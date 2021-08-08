@@ -96,27 +96,31 @@ regex(3),
 strfile(8)
 
 ## STANDARDS
-The **COMMAND** utility is a standard UNIX/POSIX command.
+The **fortune** utility is a standard UNIX command, though not a part of POSIX.
 
-It tries to follow the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide for [Python](https://www.python.org/) code.
+This version tries to follow the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide for [Python](https://www.python.org/) code.
 
 ## PORTABILITY
-To be tested under Windows.
+Tested OK under Windows.
 
 ## HISTORY
-This utility was made for [The PNU project](https://github.com/HubTou/PNU).
+The **fortune** utility first appeared in Version 7 AT&T UNIX.
+
+The much more sophisticated BSD version which this version re-implement was written by Ken Arnold around the end of 1978 and released with 4BSD and 4.1cBSD between 1980 and 1982.
+
+This re-implementation was made for the [PNU project](https://github.com/HubTou/PNU).
 
 ## LICENSE
 This utility is available under the [3-clause BSD license](https://opensource.org/licenses/BSD-3-Clause).
 
 ## AUTHORS
-[YOU](https://github.com/YOU)
+[Hubert Tournier](https://github.com/HubTou)
+
+The man page is derived from the FreeBSD project's one.
 
 ## CAVEATS
-
-## BUGS
-
-## SECURITY CONSIDERATIONS
+There are some display differences with the *-f* option between this re-implementation and classical BSD or Linux versions.
+For instance, probability percentages are printed for all files, not just those indicated.
 
 
                    ... let us keep in mind the basic governing philosophy
@@ -125,37 +129,3 @@ This utility is available under the [3-clause BSD license](https://opensource.or
                    the whole human race, if needs be.
                    Needs be.
                                               --H. Allen Smith, "Rude Jokes"
-
-
-
-
-STANDARDS
-     The fortune utility is not a standard UNIX/POSIX command.
-
-     This version tries to follow the PEP 8 style guide for Python code.
-
-PORTABILITY
-     Tested OK under Windows.
-
-HISTORY
-     The fortune utility first appeared in Version 7 AT&T UNIX.
-
-     The much more sophisticated BSD version which this version re-implement
-     was written by Ken Arnold around the end of 1978 and released with 4BSD
-     and 4.1cBSD between 1980 and 1982.
-
-     This re-implementation was made for the [PNU project]:
-     https://github.com/HubTou/PNU
-
-LICENSE
-     This utility is available under the 3-clause BSD license.
-
-AUTHORS
-     Hubert Tournier
-
-     The man page is derived from the FreeBSD project's one.
-
-CAVEATS
-     There are some display differences with the -f option between this re-im‐
-     plementation and classical BSD or Linux versions.  For instance, proba‐
-     bility percentages are printed for all files, not just those indicated.
