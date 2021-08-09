@@ -37,7 +37,7 @@ Option|Use
 -l|Long dictums only. See *-n* on how ''long'' is defined.
 -m pattern|Print out all fortunes which match the regular expression pattern. See regex(3) for a description of patterns.
 -n length|Set the longest fortune length (in characters) considered to be ''short'' (the default is 160). All fortunes longer than this are considered ''long''.
--o|Choose only from potentially offensive aphorisms. This option is superseded by *-a*.
+-o|Choose only from potentially offensive aphorisms. This option is superseded by *-a*.<br><br>... let us keep in mind the basic governing philosophy<br>of The Brotherhood, as handsomely summarized in these words:<br>we believe in healthy, hearty laughter -- at the expense of<br>the whole human race, if needs be.<br>Needs be.<br>--H. Allen Smith, "Rude Jokes"
 -s|Short apophthegms only. See *-n* on how ''short'' is defined.
 -t tries|Set the maximum number of attempts while searching for a ''short'' or ''long'' fortune (the default is 10).
 -w|Wait before termination for an amount of time calculated from the number of characters in the message. This is useful if it is executed as part of the logout procedure to guarantee that the message can be read before the screen is cleared.
@@ -72,7 +72,7 @@ is equivalent to
 ## ENVIRONMENT
 Variable|Use
 ---|---
-FORTUNE_PATH|The search path for the data files. It is a colon-separated list of directories in which fortune looks for datafiles. If not set it will default to */usr/share/games/fortune:/usr/local/share/games/fortune*. Under a Posix system, *$HOME/.local/share/games/fortune* will also be added to the default, while *%HOMEPATH%/appdata/roaming/python/share/games/fortune* will be added under a Windows system. If none of the directories specified exist, it will print a warning and exit. Note that by default, fortune only searches for a *fortunes* file, instead of all files in its FORTUNE_PATH.
+FORTUNE_PATH|The search path for the data files. It is a colon-separated list of directories in which fortune looks for datafiles. If not set it will default to */usr/share/games/fortune:/usr/local/share/games/fortune*.<br><br>Under a Posix system, *$HOME/.local/share/games/fortune* will also be added to the default, while *%HOMEPATH%/appdata/roaming/python/share/games/fortune* will be added under a Windows system.<br><br>If none of the directories specified exist, it will print a warning and exit. Note that by default, fortune only searches for a *fortunes* file, instead of all files in its FORTUNE_PATH.
 FORTUNE_SAVESTATE|If set, fortune will save some state about what fortune it was up to on disk (unused in this re-implementation, as it requires root access to the fortune directories).
 FORTUNE_COMPAT|Compatibility mode. If set, try to imitate the original BSD fortune command display as closely as possible.
 FORTUNE_DEBUG|Debug mode. If set, print some debug messages.
@@ -90,10 +90,10 @@ The **fortune** utility exits 0 on success, and >0 if an error occurs.
 In particular, if *-l*, *-m*, or *-s* is specified, failure to find a matching citation in the selected files counts as an error.
 
 ## SEE ALSO
-[cowsay(1)](https://www.freebsd.org/cgi/man.cgi?query=cowsay),
-[echobox(1)](https://www.freebsd.org/cgi/man.cgi?query=echobox),
+[cowsay(1)](https://linux.die.net/man/1/cowsay),
+[echobox(1)](https://github.com/HubTou/echobox/blob/main/README.md),
 [regex(3)](https://www.freebsd.org/cgi/man.cgi?query=regex&sektion=3),
-[strfile(8)](https://www.freebsd.org/cgi/man.cgi?query=strfile)
+[strfile(8)](https://github.com/HubTou/strfile/blob/main/README.md)
 
 ## STANDARDS
 The **fortune** utility is a standard UNIX command, though not a part of POSIX.
@@ -110,6 +110,9 @@ The much more sophisticated BSD version which this version re-implement was writ
 
 This re-implementation was made for the [PNU project](https://github.com/HubTou/PNU).
 
+It also has the *-c* and *-n* options of the Linux version.
+And it added *-C* and *-t* options of its own.
+
 ## LICENSE
 This utility is available under the [3-clause BSD license](https://opensource.org/licenses/BSD-3-Clause).
 
@@ -122,10 +125,4 @@ The man page is derived from the [FreeBSD project's one](https://www.freebsd.org
 There are some display differences with the *-f* option between this re-implementation and classical BSD or Linux versions.
 For instance, probability percentages are printed for all files, not just those indicated.
 
-
-                   ... let us keep in mind the basic governing philosophy
-                   of The Brotherhood, as handsomely summarized in these words:
-                   we believe in healthy, hearty laughter -- at the expense of
-                   the whole human race, if needs be.
-                   Needs be.
-                                              --H. Allen Smith, "Rude Jokes"
+Another difference is that this re-implementation does not risk permanently searching for a short or long fortune in a data file which has none. It will make the specified number of attempts, then exit with an error code if nothing was found.
