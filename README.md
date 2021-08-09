@@ -90,10 +90,10 @@ The **fortune** utility exits 0 on success, and >0 if an error occurs.
 In particular, if *-l*, *-m*, or *-s* is specified, failure to find a matching citation in the selected files counts as an error.
 
 ## SEE ALSO
-cowsay(1),
-echobox(1),
-regex(3),
-strfile(8)
+[cowsay(1)](https://www.freebsd.org/cgi/man.cgi?query=cowsay),
+[echobox(1)](https://www.freebsd.org/cgi/man.cgi?query=echobox),
+[regex(3)](https://www.freebsd.org/cgi/man.cgi?query=regex&sektion=3),
+[strfile(8)](https://www.freebsd.org/cgi/man.cgi?query=strfile)
 
 ## STANDARDS
 The **fortune** utility is a standard UNIX command, though not a part of POSIX.
@@ -116,7 +116,7 @@ This utility is available under the [3-clause BSD license](https://opensource.or
 ## AUTHORS
 [Hubert Tournier](https://github.com/HubTou)
 
-The man page is derived from the FreeBSD project's one.
+The man page is derived from the [FreeBSD project's one](https://www.freebsd.org/cgi/man.cgi?query=basename).
 
 ## CAVEATS
 There are some display differences with the *-f* option between this re-implementation and classical BSD or Linux versions.
