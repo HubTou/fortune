@@ -13,9 +13,10 @@ import sys
 import time
 
 import strfile
+import rot13
 
 # Version string used by the what(1) and ident(1) commands:
-ID = "@(#) $Id: fortune - print a random, hopefully interesting, adage v1.0.0 (August 11, 2021) by Hubert Tournier $"
+ID = "@(#) $Id: fortune - print a random, hopefully interesting, adage v1.0.2 (August 13, 2021) by Hubert Tournier $"
 
 # Default parameters. Can be overcome by environment variables, then command line options
 parameters = {
@@ -555,7 +556,7 @@ def search_for_pattern(fortune_files):
                 continue
 
             if file["Header"]["rotated flag"]:
-                fortune = rot13(fortune)
+                fortune = rot13.rot(fortune)
 
             if parameters["Ignore case"]:
                 results = re.search(parameters["Pattern"], fortune, flags=re.IGNORECASE)
@@ -593,24 +594,6 @@ def select_fortune_file(fortune_files):
 
 
 ################################################################################
-def rot13(fortune):
-    """Return the ROT13 version of the given fortune"""
-    # TODO:
-    # To be moved one day in a future rot13 command/library
-    rotated_fortune = ""
-    for character in fortune:
-        if character.isalpha():
-            if character.isupper():
-                rotated_fortune += chr(ord('A') + (ord(character) - ord('A') + 13) % 26)
-            else:
-                rotated_fortune += chr(ord('a') + (ord(character) - ord('a') + 13) % 26)
-        else:
-            rotated_fortune += character
-
-    return rotated_fortune
-
-
-################################################################################
 def select_fortune(file):
     """Randomly choose a fortune from a fortune file"""
 
@@ -643,7 +626,7 @@ def select_fortune(file):
             continue
 
         if file["Header"]["rotated flag"]:
-            return rot13(fortune)
+            return rot13.rot(fortune)
 
         return fortune
 
