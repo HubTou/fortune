@@ -119,7 +119,7 @@ This utility is available under the [3-clause BSD license](https://opensource.or
 ## AUTHORS
 [Hubert Tournier](https://github.com/HubTou)
 
-The man page is derived from the [FreeBSD project's one](https://www.freebsd.org/cgi/man.cgi?query=basename).
+The man page is derived from the [FreeBSD project's one](https://www.freebsd.org/cgi/man.cgi?query=fortune&manpath=FreeBSD+14.0-current).
 
 ## CAVEATS
 There are some display differences with the *-f* option between this re-implementation and classical BSD or Linux versions.
