@@ -72,7 +72,7 @@ is equivalent to
 ## ENVIRONMENT
 Variable|Use
 ---|---
-FORTUNE_PATH|The search path for the data files. It is a colon-separated list of directories in which fortune looks for datafiles. If not set it will default to */usr/share/games/fortune:/usr/local/share/games/fortune*.<br><br>Under a Posix system, *$HOME/.local/share/games/fortune* will also be added to the default, while *%HOMEPATH%/appdata/roaming/python/share/games/fortune* will be added under a Windows system.<br><br>If none of the directories specified exist, it will print a warning and exit. Note that by default, fortune only searches for a *fortunes* file, instead of all files in its FORTUNE_PATH.
+FORTUNE_PATH|The search path for the data files. It is a colon-separated list of directories in which fortune looks for datafiles. If not set it will default to */usr/share/games/fortune:/usr/local/share/games/fortune*.<br><br>Under a Posix system, *$HOME/.local/share/games/fortune* will also be added to the default, while *%HOMEPATH%/appdata/roaming/python/share/games/fortune:%HOMEPATH%\appdata\local\programs\python\pythonXX\share\games\fortune* will be added under a Windows system.<br><br>If none of the directories specified exist, it will print a warning and exit. Note that by default, fortune only searches for a *fortunes* file, instead of all files in its FORTUNE_PATH.
 FORTUNE_SAVESTATE|If set, fortune will save some state about what fortune it was up to on disk (unused in this re-implementation, as it requires root access to the fortune directories).
 FORTUNE_COMPAT|Compatibility mode. If set, try to imitate the original BSD fortune command display as closely as possible.
 FORTUNE_DEBUG|Debug mode. If set, print some debug messages.
@@ -126,3 +126,4 @@ There are some display differences with the *-f* option between this re-implemen
 For instance, probability percentages are printed for all files, not just those indicated.
 
 Another difference is that this re-implementation does not risk permanently searching for a short or long fortune in a data file which has none. It will make the specified number of attempts, then exit with an error code if nothing was found.
+
