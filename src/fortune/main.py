@@ -15,7 +15,7 @@ import time
 import strfile
 
 # Version string used by the what(1) and ident(1) commands:
-ID = "@(#) $Id: fortune - print a random, hopefully interesting, adage v1.0.0 (August 9, 2021) by Hubert Tournier $"
+ID = "@(#) $Id: fortune - print a random, hopefully interesting, adage v1.0.0 (August 11, 2021) by Hubert Tournier $"
 
 # Default parameters. Can be overcome by environment variables, then command line options
 parameters = {
@@ -125,8 +125,13 @@ def process_environment_variables():
             if os.path.isdir(pnu_fortune_path):
                 parameters["Path"].append(pnu_fortune_path)
 
+            pnu_fortune_path2=sys.executable.replace("python.exe", "share" + os.sep + "games" + os.sep + "fortune")
+            if os.path.isdir(pnu_fortune_path2):
+                parameters["Path"].append(pnu_fortune_path2)
+
         if len(parameters["Path"]) == 0:
             logging.critical("No fortune databases directories found")
+            display_help()
             sys.exit(1)
 
     # UNUSED:
