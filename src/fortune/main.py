@@ -16,7 +16,7 @@ import strfile
 import rot13
 
 # Version string used by the what(1) and ident(1) commands:
-ID = "@(#) $Id: fortune - print a random, hopefully interesting, adage v1.0.2 (August 13, 2021) by Hubert Tournier $"
+ID = "@(#) $Id: fortune - print a random, hopefully interesting, adage v1.0.3 (September 26, 2021) by Hubert Tournier $"
 
 # Default parameters. Can be overcome by environment variables, then command line options
 parameters = {
@@ -41,6 +41,14 @@ parameters = {
     "Characters per second": 20,
     "Command flavour": "",
 }
+
+
+################################################################################
+def initialize_debugging(program_name):
+    """Debugging set up"""
+    console_log_format = program_name + ": %(levelname)s: %(message)s"
+    logging.basicConfig(format=console_log_format, level=logging.DEBUG)
+    logging.disable(logging.INFO)
 
 
 ################################################################################
@@ -126,7 +134,7 @@ def process_environment_variables():
             if os.path.isdir(pnu_fortune_path):
                 parameters["Path"].append(pnu_fortune_path)
 
-            pnu_fortune_path2=sys.executable.replace("python.exe", "share" + os.sep + "games" + os.sep + "fortune")
+            pnu_fortune_path2 = sys.base_prefix + os.sep + "share" + os.sep + "games" + os.sep + "fortune"
             if os.path.isdir(pnu_fortune_path2):
                 parameters["Path"].append(pnu_fortune_path2)
 
@@ -637,15 +645,13 @@ def select_fortune(file):
 def main():
     """The program's main entry point"""
     program_name = os.path.basename(sys.argv[0])
-    exit_status = 0
 
-    console_log_format = program_name + ": %(levelname)s: %(message)s"
-    logging.basicConfig(format=console_log_format, level=logging.DEBUG)
-    logging.disable(logging.INFO)
-
+    initialize_debugging(program_name)
     process_environment_variables()
     arguments = process_command_line()
     fortune_files = process_arguments(arguments)
+
+    exit_status = 0
 
     if parameters["List files"]:
         list_files(fortune_files)

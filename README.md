@@ -89,6 +89,13 @@ We offer many data files for this utility in several additional packages, a few 
 The **fortune** utility exits 0 on success, and >0 if an error occurs.
 In particular, if *-l*, *-m*, or *-s* is specified, failure to find a matching citation in the selected files counts as an error.
 
+## EXAMPLES
+Boxing the fortune output with [echobox(1)](https://github.com/HubTou/echobox/blob/main/README.md):
+
+```
+/usr/local/bin/fortune unix-philosophy unix-quotes | echobox -S single
+```
+
 ## SEE ALSO
 [cowsay(1)](https://linux.die.net/man/1/cowsay),
 [echobox(1)](https://github.com/HubTou/echobox/blob/main/README.md),
